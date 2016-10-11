@@ -19,23 +19,18 @@ var params_bdd = {user: "pekesc5_meetclic", password: "meetclic@", host: "creati
 //*********************MYSQL*****************
 //-------------------INIT MODULOS A UTILIZAR-------------
 //MODULO DE NODE JS PARA LA CONECCION DE LA BDD DE MYSQL
+//http://expressjs.com/es/api.html
 var port_listen = 6969;
 var port_mysql = 3306;
 var puerto_io = 3000;
 var mysql = require('mysql');//para la comunicacion con la bdd 
 var express = require('express');//EL ESL L ENCARGADO DE LA COMUNCION DE URLS 
+//https://github.com/expressjs/cors
 var cors = require('cors');//EL NOS FACILITA LA COMUNICACION A ESAS URLS  ACCESO A ESA URL
 var app = express();
 app.use(cors());
 var io = require('socket.io').listen(puerto_io);//REALIZA UN PUENTE ENTRE TU APP-SISTEMA DE GESTION ---COMUNICACION ENTRE LOS DOS HACIA TU SERVIDOR
 //-------------------END MODULOS A UTILIZAR-------------
-
-//--------PERSONA----
-//--------VARIABLES GLOBALES DE TABLAS--
-var entidad_data_id = 1;//dond s almacenara la informacion dlos usuaiors 
-//    ----TABLAS A GESTIONAR---
-var cuenta_persona = "cuenta_persona";//children
-var persona = "persona";//parent
 
 var port_procesa = process.env.PORT;
 if (!port_procesa) {
@@ -43,7 +38,7 @@ if (!port_procesa) {
 }
 app.set('port', port_procesa);
 console.log("---------PROCESO------------------", port_procesa)
-
+//initBdd();
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
@@ -61,17 +56,30 @@ app.listen(app.get('port'), function () {
 //---------INIT METODOS DL SISTEMA--
 app.get('/createPersonaInformacion', function (req, res, next) {
     var result = [];
-
-
 });
 
-app.get('/personaInformacionAll', function (req, res, next) {
-
+app.get('/user/:id', function (req, res) {
+    console.log('and this matches too');
+    res.end();
 });
-
 //---END PERSONA--
 app.get('/api', function (req, res) {
     res.send('Admin Homepage');
+});
+//---CONFIGURACIUON DE ACCESO--
+var whitelist = ['http://example1.com', 'http://example2.com',"http://192.168.0.69"];
+var corsOptionsDelegate = function(req, callback){
+  var corsOptions;
+  if(whitelist.indexOf(req.header('Origin')) !== -1){
+    corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
+  }else{
+    corsOptions = { origin: false }; // disable CORS for this request
+  }
+  callback(null, corsOptions); // callback expects two parameters: error and options
+};
+
+app.get('/products/:id', cors(corsOptionsDelegate), function(req, res, next){
+  res.json({msg: 'This is CORS-enabled for a whitelisted domain.'});
 });
 
 //---------END METODOS DL SISTEMA--
@@ -122,7 +130,8 @@ function initBdd() {
     var connection = mysql.createConnection(params_bdd);
     connection.connect(function (err) {
         if (err) {
-            console.log('Error connecting to Db');
+            console.log('Error connecting to Db:');
+            console.log(err);
             return;
         } else {
 
