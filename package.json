@@ -13,6 +13,7 @@
         "ejs": "2.4.1",
         "socket.io": "latest",
         "express": "4.13.3",
+        "jhonny-five": "latest",
         "mysql": "*",
         "cors": "*"
     },
