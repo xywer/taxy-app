@@ -38,9 +38,11 @@ var cuenta_persona = "cuenta_persona";//children
 var persona = "persona";//parent
 
 var port_procesa = process.env.PORT;
-console.log("---------------------------");
+if (!port_procesa) {
+    port_procesa = port_listen;
+}
 app.set('port', port_procesa);
-console.log("---------------------------", port_procesa)
+console.log("---------PROCESO------------------", port_procesa)
 
 app.use(express.static(__dirname + '/public'));
 
@@ -78,25 +80,25 @@ var server_user = [];
 var clients = [];
 var group_leader = [];
 //------------ END SOCKETS CONFIGURACION--//-------NEWS--------
-//io.on('connection', function (socket) {
-//    console.log("ntro al sokec");
-////    ---persona agregada--
-//    socket.on("persona_informacion", function (data) {
-//        console.log("agregar personas");
-//        io.emit("persona_informacion_add", data);
-//    });
-//
-////  -----------------NEW--------------
-//    //esto sirve para emitir
-//    io.emit('user_connection', socket.id);
-//    io.emit("server_user", server_user);
-//
-//    socket.on("set_data", function (data) {
-//        console.log("usuario enviando front", data);
-//    });
-//
-//
-//});
+io.on('connection', function (socket) {
+    console.log("ntro al sokec");
+//    ---persona agregada--
+    socket.on("persona_informacion", function (data) {
+        console.log("agregar personas");
+        io.emit("persona_informacion_add", data);
+    });
+
+//  -----------------NEW--------------
+    //esto sirve para emitir
+    io.emit('user_connection', socket.id);
+    io.emit("server_user", server_user);
+
+    socket.on("set_data", function (data) {
+        console.log("usuario enviando front", data);
+    });
+
+
+});
 function getDataModel($params, callback) {
     var result;
     var query_string = $params.query_string;
