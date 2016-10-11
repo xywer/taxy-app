@@ -1,5 +1,5 @@
 {
-  "name": "Start on Heroku: Node.js",
+  "name": "Taxy App Maldy",
   "description": "A barebones Node.js app using Express 4",
   "repository": "https://github.com/heroku/taxy-app",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
