@@ -26,8 +26,8 @@ var mysql = require('mysql');//para la comunicacion con la bdd
 var express = require('express');//EL ESL L ENCARGADO DE LA COMUNCION DE URLS 
 var cors = require('cors');//EL NOS FACILITA LA COMUNICACION A ESAS URLS  ACCESO A ESA URL
 var app = express();
-//app.use(cors());
-//var io = require('socket.io').listen(puerto_io);//REALIZA UN PUENTE ENTRE TU APP-SISTEMA DE GESTION ---COMUNICACION ENTRE LOS DOS HACIA TU SERVIDOR
+app.use(cors());
+var io = require('socket.io').listen(puerto_io);//REALIZA UN PUENTE ENTRE TU APP-SISTEMA DE GESTION ---COMUNICACION ENTRE LOS DOS HACIA TU SERVIDOR
 //-------------------END MODULOS A UTILIZAR-------------
 
 //--------PERSONA----
