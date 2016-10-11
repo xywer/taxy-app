@@ -1,0 +1,8 @@
+{
+  "name": "Taxy App Maldy",
+  "description": "A barebones Node.js app using Express 4",
+  "repository": "https://github.com/heroku/taxy-app",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static","cors","socket.io"],
+  "image": "heroku/nodejs"
+}
