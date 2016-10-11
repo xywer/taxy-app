@@ -15,7 +15,9 @@
         "express": "4.13.3",
         "jhonny-five": "latest",
         "mysql": "*",
-        "cors": "*"
+        "cors": "*",
+        "johnny-five": "latest",
+        "serialport": "1.4.10"
     },
     "keywords": [
         "node",
